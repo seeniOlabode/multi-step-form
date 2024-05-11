@@ -1,0 +1,27 @@
+.form-button {
+  height: 40px;
+  border: none;
+  background-color: none;
+  background: none;
+  cursor: pointer;
+}
+
+.form-button.primary {
+  background-color: var(--denim);
+  color: white;
+  border-radius: 4px;
+  padding: 0 16px;
+}
+
+.form-button.primary:hover {
+  background-color: var(--light-purp);
+}
+
+.form-button.secondary {
+  color: var(--grey);
+  padding: 0 16px;
+}
+
+.form-button.secondary:hover {
+  color: var(--denim);
+}

@@ -1,0 +1,31 @@
+.text-form {
+}
+
+.text-form__label {
+  color: var(--denim);
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 3px;
+}
+
+.text-form__input {
+  border: solid 1px var(--light-grey);
+  height: 40px;
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  padding: 0 16px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  color: var(--denim);
+}
+
+.text-form__input:focus {
+  outline: none;
+}
+
+.text-form__input::placeholder {
+  color: var(--grey);
+  font-weight: 500;
+}

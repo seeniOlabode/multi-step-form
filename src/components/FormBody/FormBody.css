@@ -1,0 +1,12 @@
+.form-body {
+  background-color: white;
+  padding: 32px 24px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.form-body__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

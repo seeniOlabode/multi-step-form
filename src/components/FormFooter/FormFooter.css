@@ -1,0 +1,20 @@
+.form-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.prev-button {
+  position: relative;
+  right: 16px;
+}
+
+.next-button {
+  margin-left: auto;
+}
