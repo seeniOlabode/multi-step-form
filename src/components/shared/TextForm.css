@@ -7,6 +7,7 @@
   font-size: 12px;
   font-weight: 400;
   margin-bottom: 3px;
+  display: block;
 }
 
 .text-form__error {
@@ -43,4 +44,18 @@
 .text-form__input::placeholder {
   color: var(--grey);
   font-weight: 500;
+}
+
+@media screen and (min-width: 980px) {
+  .text-form__label {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .text-form__input {
+    height: 48px;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+  }
 }

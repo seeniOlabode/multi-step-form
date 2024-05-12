@@ -50,6 +50,8 @@
 
 .details__price {
   margin-top: 5px;
+  color: var(--grey) !important;
+  font-size: 14px;
 }
 
 .details__promo {
@@ -82,4 +84,26 @@
   border: 1px solid var(--light-grey);
   border-radius: 8px;
   z-index: -1;
+}
+
+@media screen and (min-width: 980px) {
+  .radio-select {
+    flex-direction: row;
+  }
+
+  .radio-select__option {
+    flex-direction: column;
+    height: 160px;
+    align-items: start;
+    justify-content: space-between;
+    aspect-ratio: 138/160;
+  }
+
+  .details__promo {
+    display: none;
+  }
+
+  .details__price {
+    margin-top: 8px;
+  }
 }

@@ -1,4 +1,7 @@
+"use client";
+
 import React, { useReducer, useContext } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 import { FormContext } from "./context/form-context";
 
@@ -14,6 +17,10 @@ import FinishUp from "./components/Steps/FinishUp.js";
 import Success from "./components/Steps/Succes.js";
 
 let queuedAction = null;
+
+function notify(text = "Hello", icon = "😅") {
+  toast(text, { icon });
+}
 
 function App(props) {
   const { dispatchForm: dispatchFormContext } = useContext(FormContext);
@@ -38,9 +45,20 @@ function App(props) {
         state.attemptedSubmit = false;
         queuedAction = null;
       }
+      function checkForUnvisitedPreviousSteps(target, current, stepsData) {
+        // allow user go to previous steps
+        if (target < current) return false;
+
+        for (let i = current + 1; i < target; i++) {
+          if (!stepsData[i].visited) return true;
+        }
+
+        return false;
+      }
       switch (action.type) {
         case "next":
           if (state.validForm || state.step === 3) {
+            state.stepsData[state.step].visited = true;
             state.step = state.step + 1;
             resetState();
           } else {
@@ -49,6 +67,7 @@ function App(props) {
           break;
         case "prev":
           if (state.validForm || state.step === 3) {
+            state.stepsData[state.step].visited = true;
             state.step = state.step - 1;
             resetState();
           } else {
@@ -57,8 +76,22 @@ function App(props) {
           break;
         case "step":
           if (state.validForm || state.step === 3) {
-            state.step = action.payload;
-            resetState();
+            if (
+              !checkForUnvisitedPreviousSteps(
+                action.payload,
+                state.step,
+                state.stepsData
+              )
+            ) {
+              state.stepsData[state.step].visited = true;
+              state.step = action.payload;
+              resetState();
+            } else if (state.validForm) {
+              state.stepsData[state.step].visited = true;
+              state.step = state.step + 1;
+              notify(`Complete leading steps to reach that stage`);
+              resetState();
+            }
           } else {
             state.attemptedSubmit = true;
           }
@@ -76,6 +109,12 @@ function App(props) {
       step: 0,
       validForm: false,
       attemptedSubmit: false,
+      stepsData: [
+        { visited: false },
+        { visited: false },
+        { visited: false },
+        { visited: false },
+      ],
     }
   );
 
@@ -107,32 +146,42 @@ function App(props) {
   }
 
   return (
-    <div className="app container-spacing">
-      <FormHeader formFlow={formFlow} />
-      {
-        [
-          <PersonalInfo
-            formFlow={formFlow}
-            setFlowValidity={setFlowValidity}
-          />,
-          <Plan formFlow={formFlow} setFlowValidity={setFlowValidity} />,
-          <AddOns formFlow={formFlow} setFlowValidity={setFlowValidity} />,
-          <FinishUp
-            formFlow={formFlow}
-            setFlowValidity={setFlowValidity}
-            goStep={goStep}
-          />,
-          <Success
-            formFlow={formFlow}
-            setFlowValidity={setFlowValidity}
-            goStep={goStep}
-          />,
-        ][formFlow?.step]
-      }
-      {formFlow.step !== 4 && (
-        <FormFooter formFlow={formFlow} goNext={goNext} goPrev={goPrev} />
-      )}
-    </div>
+    <>
+      <div className="app container-spacing">
+        <FormHeader formFlow={formFlow} goStep={goStep} />
+        {
+          [
+            <PersonalInfo
+              formFlow={formFlow}
+              setFlowValidity={setFlowValidity}
+            />,
+            <Plan formFlow={formFlow} setFlowValidity={setFlowValidity} />,
+            <AddOns formFlow={formFlow} setFlowValidity={setFlowValidity} />,
+            <FinishUp
+              formFlow={formFlow}
+              setFlowValidity={setFlowValidity}
+              goStep={goStep}
+            />,
+            <Success
+              formFlow={formFlow}
+              setFlowValidity={setFlowValidity}
+              goStep={goStep}
+            />,
+          ][formFlow?.step]
+        }
+        {formFlow.step !== 4 && (
+          <FormFooter formFlow={formFlow} goNext={goNext} goPrev={goPrev} />
+        )}
+      </div>
+      <Toaster
+        toastOptions={{
+          style: {
+            background: "white",
+            color: "var(--denim)",
+          },
+        }}
+      />
+    </>
   );
 }
 

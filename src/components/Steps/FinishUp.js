@@ -60,21 +60,26 @@ export default function FinishUp({ goStep }) {
             {schemeData.shortForm}
           </span>
         </div>
-        <ul className="finish-up__add-ons">
-          {Object.keys(formContext.addOns).map((keyName) => {
-            return formContext.addOns[keyName].value ? (
-              <li className="add-on" key={keyName}>
-                <span className="add-on__name">{keyName}</span>
-                <span className="add-on__price">
-                  +${formContext.addOns[keyName].price[`per${schemeData.name}`]}
-                  /{schemeData.shortForm}
-                </span>
-              </li>
-            ) : (
-              ""
-            );
-          })}
-        </ul>
+        {(formContext.addOns["Online service"].value ||
+          formContext.addOns["Larger storage"].value ||
+          formContext.addOns["Customizable profile"].value) && (
+          <ul className="finish-up__add-ons">
+            {Object.keys(formContext.addOns).map((keyName) => {
+              return formContext.addOns[keyName].value ? (
+                <li className="add-on" key={keyName}>
+                  <span className="add-on__name">{keyName}</span>
+                  <span className="add-on__price">
+                    +$
+                    {formContext.addOns[keyName].price[`per${schemeData.name}`]}
+                    /{schemeData.shortForm}
+                  </span>
+                </li>
+              ) : (
+                ""
+              );
+            })}
+          </ul>
+        )}
       </div>
 
       <div className="finish-up__total">

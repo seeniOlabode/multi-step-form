@@ -2,9 +2,9 @@ import React, { useReducer } from "react";
 
 const formSchema = {
   personalInfo: {
-    name: "Olabode-Odebunmi Oluwaseeni",
-    email: "seeniolabode8734@gmail.com",
-    phone: "071032512353215",
+    name: "",
+    email: "",
+    phone: "",
   },
   plan: {
     name: "Arcade",

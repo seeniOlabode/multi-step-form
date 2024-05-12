@@ -9,8 +9,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 12px;
-  border-bottom: solid 1px rgba(150, 153, 170, 0.2);
 }
 
 .plan__description {
@@ -37,7 +35,7 @@
 }
 
 .name__action:hover {
-  color: var(--denim);
+  color: var(--purple);
 }
 
 .plan__price {
@@ -52,6 +50,9 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  border-top: solid 1px rgba(150, 153, 170, 0.2);
+  margin-top: 12px;
+  padding-top: 12px;
 }
 
 .add-on {

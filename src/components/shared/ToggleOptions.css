@@ -60,6 +60,10 @@
   border-color: var(--purple);
 }
 
+.option__checkbox:checked ~ .details__price {
+  color: var(--purple) !important;
+}
+
 .details__name {
   font-size: 14px;
   color: var(--denim);

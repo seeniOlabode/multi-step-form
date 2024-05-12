@@ -8,7 +8,7 @@ import FormBody from "../FormBody/FormBody";
 
 export default function Success({}) {
   return (
-    <FormBody>
+    <FormBody classes={["success-form-body"]}>
       <div className="success-container">
         <img
           className="success-container__img"
