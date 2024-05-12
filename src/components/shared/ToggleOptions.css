@@ -7,13 +7,27 @@
 .toggle-options__option {
   width: 100%;
   height: 62px;
-  border: 1px solid var(--light-grey);
-  border-radius: 8px;
   display: flex;
   align-items: center;
   padding: 0 16px;
   cursor: pointer;
   gap: 16px;
+  position: relative;
+}
+
+.toggle-option__highlighter {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+}
+
+.toggle-options__option:hover .toggle-option__highlighter {
+  border-color: var(--purple);
 }
 
 .option__box {
@@ -39,6 +53,10 @@
 
 .option__checkbox:checked ~ .option__box {
   background-color: var(--purple);
+  border-color: var(--purple);
+}
+
+.option__checkbox:checked ~ .toggle-option__highlighter {
   border-color: var(--purple);
 }
 

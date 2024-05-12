@@ -1,8 +1,16 @@
 .form-body {
+  padding-bottom: 150px;
+}
+
+.form-body__wrapper {
   background-color: white;
   padding: 32px 24px;
   width: 100%;
   border-radius: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 25px 40px -20px rgba(0, 0, 0, 0.095);
 }
 
 .form-body__fields {

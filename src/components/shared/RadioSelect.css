@@ -12,6 +12,9 @@
   display: flex;
   gap: 14px;
   position: relative;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
 }
 
 .radio-select__option:first-child .option__icon img {
@@ -46,11 +49,12 @@
 }
 
 .details__price {
-  margin-top: 8px;
+  margin-top: 5px;
 }
 
 .details__promo {
-  margin-top: 8px;
+  margin-top: 12px;
+  font-size: 12px;
 }
 
 .radio-select__option [type="radio"] {
@@ -62,6 +66,11 @@
 
 .radio-select__option [type="radio"]:checked + .option__highlighter {
   border-color: var(--purple);
+  background-color: rgba(248, 249, 255, 1);
+}
+
+.radio-select__option:hover .option__highlighter {
+  border-color: var(--purple);
 }
 
 .option__highlighter {
@@ -72,4 +81,5 @@
   top: 0;
   border: 1px solid var(--light-grey);
   border-radius: 8px;
+  z-index: -1;
 }

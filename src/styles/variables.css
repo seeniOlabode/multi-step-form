@@ -7,5 +7,7 @@
   --orange: #ffaf7e;
   --pink: #f9818e;
   --purple: #483eff;
-  --very-light-grey: #f8f9ff;
+  --very-light-grey: rgb(248, 249, 255);
+  --error: #ee374a;
+  --sky-blue: #bee2fd;
 }

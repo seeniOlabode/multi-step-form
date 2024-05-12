@@ -3,7 +3,7 @@ import Check from "../../assets/icons/checkbox.svg";
 
 import "./ToggleOptions.css";
 
-export default function ToggleOptions({ options, onChange }) {
+export default function ToggleOptions({ options, onChange, durationData }) {
   return (
     <div className="toggle-options">
       {Object.keys(options).map((keyName) => (
@@ -29,7 +29,11 @@ export default function ToggleOptions({ options, onChange }) {
             </span>
           </span>
 
-          <span className="details__price">+1$/mo</span>
+          <span className="details__price">
+            + ${options[keyName].price[`per${durationData.name}`]}/
+            {durationData.shortForm}
+          </span>
+          <span className="toggle-option__highlighter"></span>
         </label>
       ))}
     </div>

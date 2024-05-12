@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-top: solid 1px var(--light-grey);
 }
 
 .prev-button {

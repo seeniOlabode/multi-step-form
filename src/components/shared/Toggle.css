@@ -2,12 +2,18 @@
   margin-top: 10px;
   display: block;
   background-color: var(--very-light-grey);
+  border: solid 1px var(--very-light-grey);
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
   gap: 24px;
+  cursor: pointer;
+}
+
+.toggle:hover {
+  border-color: var(--purple);
 }
 
 .toggle__checkbox {

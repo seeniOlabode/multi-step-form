@@ -7,7 +7,7 @@ import Button from "../shared/Button.js";
 export default function formFooter(props) {
   return (
     <footer className="form-footer container-spacing">
-      {![0, 3].includes(props?.formFlow?.step) && (
+      {0 !== props?.formFlow?.step && (
         <Button
           variant="secondary prev-button container"
           onClick={props.goPrev}
@@ -16,7 +16,7 @@ export default function formFooter(props) {
         </Button>
       )}
       <Button variant="primary next-button" onClick={props.goNext}>
-        Next Step
+        {props.formFlow.step === 3 ? "Confirm" : "Next Step"}
       </Button>
     </footer>
   );

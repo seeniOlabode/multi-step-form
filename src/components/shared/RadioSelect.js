@@ -1,14 +1,13 @@
 // Styles
 import "./RadioSelect.css";
 
-const scheme = "/yr";
-
 export default function RadioSelect({
   options,
   name,
   keyName,
   selectedValue,
   onChange,
+  durationData,
 }) {
   return (
     <div className="radio-select">
@@ -26,8 +25,8 @@ export default function RadioSelect({
           <span className="option__details">
             <span className="details__name heading-2">{option.name}</span>
             <span className="details__price body">
-              {option.price.perYear}
-              {scheme}
+              ${option.price[`per${durationData.name}`]}/
+              {durationData.shortForm}
             </span>
             <span className="details__promo sub-body">{option.promo}</span>
           </span>

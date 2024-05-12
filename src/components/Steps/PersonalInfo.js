@@ -10,9 +10,10 @@ let validityStore = null;
 const validateName = (name) => name.trim().length >= 3;
 const validateEmail = (email) => email.trim() !== "" && email.includes("@");
 const validatePhone = (phone) =>
-  typeof Number(phone.trim().length >= 8) === "number";
+  phone.trim().replaceAll(" ", "").length >= 8 &&
+  !isNaN(Number(phone.trim().replaceAll(" ", "")));
 
-export default function PersonalInfo({ setFlowValidity }) {
+export default function PersonalInfo({ setFlowValidity, formFlow }) {
   const { FormState: formContext } = useContext(FormContext);
   const [personalInfoForm, setPersonalInfoForm] = useState(
     formContext.personalInfo
@@ -67,6 +68,8 @@ export default function PersonalInfo({ setFlowValidity }) {
         value={personalInfoForm.name}
         onChange={handleNameChange}
         type="text"
+        validationMessage="Enter your name"
+        errorState={!formValid.name && formFlow.attemptedSubmit}
       />
       <TextForm
         label="Email"
@@ -74,6 +77,8 @@ export default function PersonalInfo({ setFlowValidity }) {
         value={personalInfoForm.email}
         onChange={handleEmailChange}
         type="email"
+        validationMessage="Enter your email"
+        errorState={!formValid.email && formFlow.attemptedSubmit}
       />
       <TextForm
         label="Phone Number"
@@ -81,6 +86,8 @@ export default function PersonalInfo({ setFlowValidity }) {
         value={personalInfoForm.phone}
         onChange={handlePhoneChange}
         type="tel"
+        validationMessage="Enter your phone number"
+        errorState={!formValid.phone && formFlow.attemptedSubmit}
       />
     </FormBody>
   );

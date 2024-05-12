@@ -20,20 +20,26 @@ const formSchema = {
     "Online service": {
       description: "Access to multiplayer games",
       value: true,
-      perYear: 10,
-      perMonth: 1,
+      price: {
+        perYear: 10,
+        perMonth: 1,
+      },
     },
     "Larger storage": {
       description: "Access to multiplayer games",
       value: true,
-      perYear: 20,
-      perMonth: 2,
+      price: {
+        perYear: 20,
+        perMonth: 2,
+      },
     },
     "Customizable profile": {
       description: "Access to multiplayer games",
       value: false,
-      perYear: 20,
-      perMonth: 2,
+      price: {
+        perYear: 20,
+        perMonth: 2,
+      },
     },
   },
   scheme: 0,
@@ -43,7 +49,7 @@ export const FormContext = React.createContext(formSchema);
 
 export default function FormContextProvider(props) {
   const [FormState, dispatchForm] = useReducer((currentState, action) => {
-    const state = currentState;
+    const state = { ...currentState };
     switch (action.type) {
       case "personalInfo":
         state.personalInfo = action.payload;

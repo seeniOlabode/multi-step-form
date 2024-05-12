@@ -10,10 +10,28 @@ import "./FinishUp.css";
 // Utils
 import { convertSchemeToText } from "../../utils";
 
-export default function FinishUp(props) {
+export default function FinishUp({ goStep }) {
   const { FormState: formContext } = useContext(FormContext);
 
   const schemeData = convertSchemeToText(formContext.scheme);
+
+  function getFormTotal(formObject) {
+    const addOnTotal = Object.keys(formObject.addOns).reduce(
+      (total, currentKey) => {
+        if (formObject.addOns[currentKey].value) {
+          return (
+            total + formObject.addOns[currentKey].price[`per${schemeData.name}`]
+          );
+        } else {
+          return 0 + total;
+        }
+      },
+      0
+    );
+    return formObject.plan.price[`per${schemeData.name}`] + addOnTotal;
+  }
+
+  const total = getFormTotal(formContext);
 
   return (
     <FormBody
@@ -27,7 +45,15 @@ export default function FinishUp(props) {
               {formContext.plan.name}{" "}
               <span className="name__scheme">({schemeData.longForm})</span>
             </span>
-            <button className="name__action">Change</button>
+            <button
+              className="name__action"
+              onClick={(e) => {
+                e.preventDefault();
+                goStep(1);
+              }}
+            >
+              Change
+            </button>
           </span>
           <span className="plan__price">
             ${formContext.plan.price[`per${schemeData.name}`]}/
@@ -40,8 +66,8 @@ export default function FinishUp(props) {
               <li className="add-on" key={keyName}>
                 <span className="add-on__name">{keyName}</span>
                 <span className="add-on__price">
-                  +${formContext.addOns[keyName][`per${schemeData.name}`]}/
-                  {schemeData.shortForm}
+                  +${formContext.addOns[keyName].price[`per${schemeData.name}`]}
+                  /{schemeData.shortForm}
                 </span>
               </li>
             ) : (
@@ -52,8 +78,12 @@ export default function FinishUp(props) {
       </div>
 
       <div className="finish-up__total">
-        <span className="total__text">Total (per month)</span>
-        <span className="total__price">+$12/mo</span>
+        <span className="total__text">
+          Total (per {schemeData.name.toLowerCase()})
+        </span>
+        <span className="total__price">
+          +${`${total}`}/{schemeData.shortForm}
+        </span>
       </div>
     </FormBody>
   );

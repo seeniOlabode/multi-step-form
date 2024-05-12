@@ -33,6 +33,11 @@
   font-family: "Ubuntu", sans-serif;
   font-size: 14px;
   margin-top: 3px;
+  cursor: pointer;
+}
+
+.name__action:hover {
+  color: var(--denim);
 }
 
 .plan__price {

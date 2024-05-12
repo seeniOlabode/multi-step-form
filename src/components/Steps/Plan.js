@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import FormBody from "../FormBody/FormBody";
 import RadioSelect from "../shared/RadioSelect";
 import Toggle from "../shared/Toggle";
 
 import { FormContext } from "../../context/form-context";
+import { convertSchemeToText } from "../../utils";
 
 const planOptions = [
   {
@@ -47,6 +48,14 @@ export default function Plan({ setFlowValidity }) {
     scheme: formContext.scheme,
   });
 
+  const [schemeData, setSchemeData] = useState(
+    convertSchemeToText(selectedPlan.scheme)
+  );
+
+  useEffect(() => {
+    setSchemeData(convertSchemeToText(selectedPlan.scheme));
+  }, [selectedPlan]);
+
   const [formValid, setFormValid] = useState({
     planIndex: true,
     scheme: true,
@@ -77,7 +86,6 @@ export default function Plan({ setFlowValidity }) {
       ...formValid,
       planIndex: validatePlan(selectedPlan.planIndex),
     });
-    updateValidity();
   };
 
   const handleSchemeChange = (event) => {
@@ -86,8 +94,11 @@ export default function Plan({ setFlowValidity }) {
       ...formValid,
       planIndex: validatePlan(selectedPlan.scheme),
     });
-    updateValidity();
   };
+
+  useEffect(() => {
+    updateValidity();
+  }, [formValid]);
 
   return (
     <FormBody
@@ -100,6 +111,7 @@ export default function Plan({ setFlowValidity }) {
         keyName="name"
         onChange={handlePlanChange}
         selectedValue={selectedPlan.planIndex}
+        durationData={schemeData}
       />
       <Toggle
         offValue="Monthly"
