@@ -14,7 +14,7 @@ import PersonalInfo from "./components/Steps/PersonalInfo";
 import Plan from "./components/Steps/Plan";
 import AddOns from "./components/Steps/AddOns";
 import FinishUp from "./components/Steps/FinishUp.js";
-import Success from "./components/Steps/Succes.js";
+import Success from "./components/Steps/Success.js";
 
 let queuedAction = null;
 

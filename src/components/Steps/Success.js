@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 // assets
 import SuccessCheck from "../../assets/icons/success-check.svg";
@@ -6,7 +6,7 @@ import "./Success.css";
 
 import FormBody from "../FormBody/FormBody";
 
-export default function Success({}) {
+export default function Success() {
   return (
     <FormBody classes={["success-form-body"]}>
       <div className="success-container">
